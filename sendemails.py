@@ -1,5 +1,7 @@
 import smtplib
 import mimetypes
+import datetime
+import os
 from email.mime.multipart import MIMEMultipart
 from email import encoders
 from email.message import Message
@@ -8,48 +10,88 @@ from email.mime.base import MIMEBase
 from email.mime.image import MIMEImage
 from email.mime.text import MIMEText
 
-emailfrom = "labmouse7@gmail.com"
-emailto = ""
-fileToSend = "August Bill for Christine.txt"
+mydate = datetime.datetime.now()
+
+veronica_email = "veronica.seo@gmail.com"
+christine_email = "labmouse7@gmail.com"
+arvind_email = "arvindi.me@gmail.com"
+victor_email = "vmaurer@connect.ust.hk"
+
+emailfrom = christine_email
 username = "labmouse7"
 password = ""
 
-msg = MIMEMultipart()
-msg["From"] = emailfrom
-msg["To"] = emailto
-msg["Subject"] = "help I cannot send an attachment to save my life"
-msg.preamble = "help I cannot send an attachment to save my life"
-
-ctype, encoding = mimetypes.guess_type(fileToSend)
-if ctype is None or encoding is not None:
-    ctype = "application/octet-stream"
-
-maintype, subtype = ctype.split("/", 1)
-
-if maintype == "text":
-    fp = open(fileToSend)
-    # Note: we should handle calculating the charset
-    attachment = MIMEText(fp.read(), _subtype=subtype)
-    fp.close()
-elif maintype == "image":
-    fp = open(fileToSend, "rb")
-    attachment = MIMEImage(fp.read(), _subtype=subtype)
-    fp.close()
-elif maintype == "audio":
-    fp = open(fileToSend, "rb")
-    attachment = MIMEAudio(fp.read(), _subtype=subtype)
-    fp.close()
-else:
-    fp = open(fileToSend, "rb")
-    attachment = MIMEBase(maintype, subtype)
-    attachment.set_payload(fp.read())
-    fp.close()
-    encoders.encode_base64(attachment)
-attachment.add_header("Content-Disposition", "attachment", filename=fileToSend)
-msg.attach(attachment)
 
 server = smtplib.SMTP("smtp.gmail.com:587")
 server.starttls()
 server.login(username,password)
+
+
+#email to veronica
+emailto = veronica_email
+fileToSend = mydate.strftime("%B") + " Bill for Veronica.txt"
+
+msg = MIMEMultipart()
+msg["From"] = emailfrom
+msg["To"] = emailto
+msg["Subject"] = "[Verbena] Hey Veronica, here's " +  mydate.strftime("%B") + " monthly expense bill!"
+msg.preamble = "Provided by automated scheduler using python and Task Scheduler"
+
+f = open(fileToSend)
+attachment = MIMEText(f.read())
+attachment.add_header("Content-Disposition", "attachment", filename=fileToSend)
+msg.attach(attachment)
 server.sendmail(emailfrom, emailto, msg.as_string())
+
+
+#email to christine
+emailto = "ckylee@connect.ust.hk"
+fileToSend = mydate.strftime("%B") + " Bill for Christine.txt"
+
+msg = MIMEMultipart()
+msg["From"] = emailfrom
+msg["To"] = emailto
+msg["Subject"] = "[Verbena] Hey Christine, here's " +  mydate.strftime("%B") + " monthly expense bill!"
+msg.preamble = "Provided by automated scheduler using python and Task Scheduler"
+
+f = open(fileToSend)
+attachment = MIMEText(f.read())
+attachment.add_header("Content-Disposition", "attachment", filename=fileToSend)
+msg.attach(attachment)
+server.sendmail(emailfrom, emailto, msg.as_string())
+
+#email to arvind
+emailto = arvind_email
+fileToSend = mydate.strftime("%B") + " Bill for Arvind.txt"
+
+msg = MIMEMultipart()
+msg["From"] = emailfrom
+msg["To"] = emailto
+msg["Subject"] = "[Verbena] Hey Arvind, here's " +  mydate.strftime("%B") + " monthly expense bill!"
+msg.preamble = "Provided by automated scheduler using python and Task Scheduler"
+
+f = open(fileToSend)
+attachment = MIMEText(f.read())
+attachment.add_header("Content-Disposition", "attachment", filename=fileToSend)
+msg.attach(attachment)
+server.sendmail(emailfrom, emailto, msg.as_string())
+
+#email to victor
+emailto = victor_email
+fileToSend = mydate.strftime("%B") + " Bill for Victor.txt"
+
+msg = MIMEMultipart()
+msg["From"] = emailfrom
+msg["To"] = emailto
+msg["Subject"] = "[Verbena] Hey Victor, here's " +  mydate.strftime("%B") + " monthly expense bill!"
+msg.preamble = "Provided by automated scheduler using python and Task Scheduler"
+
+f = open(fileToSend)
+attachment = MIMEText(f.read())
+attachment.add_header("Content-Disposition", "attachment", filename=fileToSend)
+msg.attach(attachment)
+server.sendmail(emailfrom, emailto, msg.as_string())
+
+
+
 server.quit()

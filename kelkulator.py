@@ -1,6 +1,7 @@
 # Living Expenses Calculator for Verbena Heights fam
 
 import csv
+import datetime
 
 #accounts
 veronica_pay = []
@@ -15,11 +16,11 @@ arvind_receive = []
 victor_pay = []
 victor_receive = []
 
-thismonth = input("What month is it?")
-print("Ok, the file's loaded for the month of " + thismonth)
+mydate = datetime.datetime.now()
+print("Ok, the file's loaded for the month of " + mydate.strftime("%B"))
 
 # Open the file
-expense_file = open("Monthly Expenses + Items Purchased - " + thismonth + ".csv", "r")
+expense_file = open("Monthly Expenses + Items Purchased - " + mydate.strftime("%B") + ".csv", "r")
 reader = csv.reader(expense_file)
 next(expense_file)
 
@@ -72,10 +73,10 @@ christine_to_veronicabill = 0
 arvind_to_veronicabill = 0
 victor_to_veronicabill = 0
 
-veronica_bill = open(thismonth + ' Bill for Veronica.txt', 'w')
-veronica_bill.write("%s\n%s\n%s\n" % ('Veronica\'s Bill for ' + thismonth, '---------------------------------', "Here's stuff you need to get from others:"))
+veronica_bill = open(mydate.strftime("%B")+ ' Bill for Veronica.txt', 'w')
+veronica_bill.write("%s\n%s\n%s\n" % ('Veronica\'s Bill for ' + mydate.strftime("%B"), '---------------------------------', "Here's stuff you need to get from others:"))
 
-veronica_bill = open(thismonth + ' Bill for Veronica.txt', 'a')
+veronica_bill = open(mydate.strftime("%B") + ' Bill for Veronica.txt', 'a')
 
 for stuff_to_receive in veronica_receive:
 	for name in stuff_to_receive[4]:
@@ -149,10 +150,10 @@ veronica_to_christinebill = 0
 arvind_to_christinebill = 0
 victor_to_christinebill = 0
 
-christine_bill = open(thismonth + ' Bill for Christine.txt', 'w')
-christine_bill.write("%s\n%s\n%s\n" % ('Christine\'s Bill for ' + thismonth, '---------------------------------', "Here's stuff you need to get from others:"))
+christine_bill = open(mydate.strftime("%B") + ' Bill for Christine.txt', 'w')
+christine_bill.write("%s\n%s\n%s\n" % ('Christine\'s Bill for ' + mydate.strftime("%B"), '---------------------------------', "Here's stuff you need to get from others:"))
 
-christine_bill = open(thismonth + ' Bill for Christine.txt', 'a')
+christine_bill = open(mydate.strftime("%B") + ' Bill for Christine.txt', 'a')
 
 for stuff_to_receive in christine_receive:
 	for name in stuff_to_receive[4]:
@@ -225,10 +226,10 @@ veronica_to_arvindbill = 0
 christine_to_arvindbill = 0
 victor_to_arvindbill = 0
 
-arvind_bill = open(thismonth + ' Bill for Arvind.txt', 'w')
-arvind_bill.write("%s\n%s\n%s\n" % ('Arvind\'s Bill for ' + thismonth, '---------------------------------', "Here's stuff you need to get from others:"))
+arvind_bill = open(mydate.strftime("%B")+ ' Bill for Arvind.txt', 'w')
+arvind_bill.write("%s\n%s\n%s\n" % ('Arvind\'s Bill for ' + mydate.strftime("%B"), '---------------------------------', "Here's stuff you need to get from others:"))
 
-arvind_bill = open(thismonth + ' Bill for Arvind.txt', 'a')
+arvind_bill = open(mydate.strftime("%B") + ' Bill for Arvind.txt', 'a')
 
 for stuff_to_receive in arvind_receive:
 	for name in stuff_to_receive[4]:
@@ -303,10 +304,10 @@ veronica_to_victorbill = 0
 christine_to_victorbill = 0
 arvind_to_victorbill = 0
 
-victor_bill = open(thismonth + ' Bill for Victor.txt', 'w')
-victor_bill.write("%s\n%s\n%s\n" % ('Victor\'s Bill for ' + thismonth, '---------------------------------', "Here's stuff you need to get from others:"))
+victor_bill = open(mydate.strftime("%B") + ' Bill for Victor.txt', 'w')
+victor_bill.write("%s\n%s\n%s\n" % ('Victor\'s Bill for ' + mydate.strftime("%B"), '---------------------------------', "Here's stuff you need to get from others:"))
 
-victor_bill = open(thismonth + ' Bill for Victor.txt', 'a')
+victor_bill = open(mydate.strftime("%B") + ' Bill for Victor.txt', 'a')
 
 for stuff_to_receive in victor_receive:
 	for name in stuff_to_receive[4]:
